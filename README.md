@@ -15,7 +15,7 @@ Because my bash script was tool and distro directory structure dependant (also p
 * ~~Check if there is a wlan0 and log it if there isn't~~
 * Either log rotation or to keep logs short (around 15 lines or so to prevent insanity from reading a giant log file)
 * Do multiple wifi interfaces
-* Client<->station logging, to keep track who is on your network
+* Client<->station logging, to keep track of who is on your network
 * Database logging, that might come in handy for a possible node.js project to make it more visible
 * ... more ideas will probably follow, once the tool evolves.
 
