@@ -8,7 +8,7 @@ Once I had those in installed, I proceeded with configuring my interfaces and ho
 lo and behold it was not keeping my wifi dongle in a bridge after a restart. So I made a bash script to check if wlan0 is in my bridge and add it, if it isn't already there. 
 later it evolved and I had it in my crontab and added some logging to track when it has been removed from the bridge for any reason.
 
-Because my bash script was tool and distro directory structure dependant (also partly out of sheer boredom, and hoping it can help someone else who is facing the same issue)
+Because my bash script was tool and distro directory structure dependant (also partly out of sheer boredom, and hoping it can help someone else who is facing the same issue), I decided to go with python... so there you go.
 
 ## Future plans/additions:
 * ~~After adding/checking brctl, log it~~
