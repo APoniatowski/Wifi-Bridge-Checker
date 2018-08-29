@@ -21,26 +21,23 @@ def success_outputter():
   timestamp = time.time()
   timestamp = datetime.datetime.fromtimestamp(timestamp).strftime('%d-%m-%Y %H:%M:%S')
   success_output = "%s  ---  wlan0 already in brctl show and %s connected" % (timestamp,conn_clients)
-  success_write = open('/home/wlan-logs/wlan-success.log','a')
-  success_write.write(success_output + '\n')
-  success_write.close()
-
+  with open('/home/wlan-logs/wlan-success.log','a') as FW:
+    FW.write(success_output + '\n')
+  
 def fail_outputter():
   subprocess.call('sudo brctl addif br0 wlan0', shell=True)
   timestamp = time.time()
   timestamp = datetime.datetime.fromtimestamp(timestamp).strftime('%d-%m-%Y %H:%M:%S')
   failure_output = timestamp + "  ---  added wlan0 to bridge"
-  failure_write = open('/home/wlan-logs/wlan-success.log','a')
-  failure_write.write(failure_output + '\n')
-  failure_write.close()
+  with open('/home/wlan-logs/wlan-failure.log','a') as FW:
+    FW.write(failure_output + '\n')
 
 def interface_check():
   timestamp = time.time()
   timestamp = datetime.datetime.fromtimestamp(timestamp).strftime('%d-%m-%Y %H:%M:%S')
   interface_output = timestamp + "  ---  Please check your WiFi adaptor, it might be unplugged or faulty"
-  interface_write = open('/home/wlan-logs/interface-failure.log','a')
-  interface_write.write(interface_output + '\n')
-  interface_write.close()
+  with open('/home/wlan-logs/interface-failure.log','a') as FW:
+    FW.write(interface_output + '\n')
 
 #-----------------------------------wlan bridge check and output logs----------------------------------------------
 
