@@ -13,7 +13,7 @@ Because my bash script was tool and distro directory structure dependant (also p
 ## Future plans/additions:
 * ~~After adding/checking brctl, log it~~
 * ~~Check if there is a wlan0 and log it if there isn't~~
-* Either log rotation or to keep logs short (around 15 lines or so to prevent insanity from reading a giant log file)
+* Either log rotation or ~~`to keep logs short (around 15 lines or so to prevent insanity from reading a giant log file)~~
 * Do multiple wifi interfaces
 * Client<->station logging, to keep track of who is on your network
 * Database logging, that might come in handy for a possible node.js project to make it more visible
