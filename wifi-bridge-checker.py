@@ -3,6 +3,8 @@
 import netifaces
 import subprocess
 import sys
+import os
+import traceback
 import datetime
 import time
 
@@ -14,6 +16,21 @@ bridgecheck_corrected = bridgecheck_corrected.decode("utf-8")
 iface = ""
 
 # -----------------------------------defining functions-----------------------------------------------------------
+def log_reduction():
+    logs = ['/home/wlan-logs/wlan-success.log', '/home/wlan-logs/wlan-failure.log', '/home/wlan-logs/interface-failure.log']
+    for log in logs:
+      linecount = 0
+      firstlines = []
+      with open(log) as readfile, open('/home/wlan-logs/tmp.txt','w') as tmp:
+        for index, line in enumerate(readfile):
+          linecount +=1
+        if linecount > 15:
+          for i in xrange(linecount - 15):
+            firstlines.append(next(readfile))
+          for l in readfile:
+            tmp.write(l)
+      os.replace('/home/wlan-logs/tmp.txt', log)      
+
 def success_outputter():
   conn_clients = subprocess.check_output('sudo iw dev wlan0 station dump | grep Station | wc -l', shell=True)
   conn_clients = conn_clients.strip()
@@ -40,15 +57,20 @@ def interface_check():
     FW.write(interface_output + '\n')
 
 #-----------------------------------wlan bridge check and output logs----------------------------------------------
-
-if 'wlan0' in ints:
-  if bridgecheck_corrected == "wlan0":
-    print("Bridge already established, no need to add it")
-    success_outputter()
+try:
+  if 'wlan0' in ints:
+    if bridgecheck_corrected == "wlan0":
+      print("Bridge already established, no need to add it")
+      success_outputter()
+    else:
+      print("Bridge does not contain wlan0. Adding and logging it now...")
+      fail_outputter()
   else:
-    print("Bridge does not contain wlan0. Adding and logging it now...")
-    fail_outputter()
-else:
-  print("Please check your WiFi adaptor...")
-  interface_check()
+    print("Please check your WiFi adaptor...")
+    interface_check()
+except Exception as err:
+  print('Error -->  '+ str(err))
+  print(traceback.format_exc())
+finally:
+  log_reduction()
 
