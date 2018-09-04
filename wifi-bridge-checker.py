@@ -25,7 +25,7 @@ def log_reduction():
         for index, line in enumerate(readfile):
           linecount +=1
         if linecount > 15:
-          for i in xrange(linecount - 15):
+          for i in range(linecount - 15):
             firstlines.append(next(readfile))
           for l in readfile:
             tmp.write(l)
